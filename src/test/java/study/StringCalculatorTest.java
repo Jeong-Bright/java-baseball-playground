@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -39,5 +40,17 @@ public class StringCalculatorTest {
         inputHandling(input);
 
         Assertions.assertThat(stringCalculator.calculate()).isEqualTo(2);
+    }
+
+    @Test
+    void CalculatorTest4() {
+        String input = "2 C 0";
+        inputHandling(input);
+        Assertions.assertThatThrownBy(() -> stringCalculator.calculate()).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("연산자가 아닌 문자는 입력 불가능합니다.");
+
+
+        inputHandling("");
+        Assertions.assertThat(stringCalculator.calculate()).isEqualTo(0);
     }
 }

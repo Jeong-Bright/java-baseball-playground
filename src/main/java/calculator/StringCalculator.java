@@ -1,9 +1,6 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class StringCalculator {
 
@@ -30,7 +27,13 @@ public class StringCalculator {
     public int calculate() {
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
+        String input;
+        try {
+            input = scanner.nextLine();
+        } catch (NoSuchElementException noSuchElementException) {
+            noSuchElementException.getMessage();
+            return 0;
+        }
 
         int result = 0;
 
@@ -78,6 +81,8 @@ public class StringCalculator {
                 return 0;
             }
         }
+        else throw new IllegalArgumentException("연산자가 아닌 문자는 입력 불가능합니다.");
+
         return sum;
     }
 
