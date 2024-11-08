@@ -4,7 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Scanner;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
     @Test
@@ -43,4 +45,41 @@ public class StringTest {
         // then
         assertThat(removeParentheses).isEqualTo("1,2");
     }
+
+    @Test
+    void charAt() {
+        // given
+        String existingString = "abc";
+        int target = 0;
+        // when
+        char searchCharacter = existingString.charAt(target);
+        // then
+        Assertions.assertThat(searchCharacter).isEqualTo('a');
+
+        // ---
+
+        // given
+        String existingStringV2 = "abcd";
+        int targetV2 = 10;
+        int lengthOfString = existingStringV2.length();
+
+        // when
+        // then
+        assertThatThrownBy(
+                () -> {
+                    existingStringV2.charAt(targetV2);
+                })
+                .isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: %d", targetV2);
+
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    existingStringV2.charAt(targetV2);
+                })
+                .withMessage("%s: %d", "String index out of range", targetV2)
+                .withMessageContaining("String index out of range: 10")
+                .withNoCause();
+    }
+
+
 }
