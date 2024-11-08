@@ -32,4 +32,15 @@ public class StringTest {
         // then
         Assertions.assertThat(separationStringV2).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("괄호 안에 포함된 숫자를 substring 메소드를 활용해 숫자만 반환하도록 한다.")
+    void subString() {
+        // given
+        String beforeRemoveParentheses = "(1,2)";
+        // when
+        String removeParentheses = beforeRemoveParentheses.substring(1, 4);
+        // then
+        assertThat(removeParentheses).isEqualTo("1,2");
+    }
 }
